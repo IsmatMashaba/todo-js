@@ -4,9 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
     <title>To do list</title>
   </head>
   <body>
-    <p>To do list</p>
+    <h2>To do list</h2>
+    <form>
+  <label for="taskName">Task name: </label>
+  <input type="text" id="taskName" name="taskName" required>
+    <label for="date">Date: </label>
+    <input type="date" id="date" name="date" required>
+    <label for="status">Status: </label>
+    <select name="status" id="status" required>
+      <option value="done">Done</option>
+      <option value="Not Started"> Not Started</option>
+      <option value="In progress"> In progress</option>
+    </select>
+    <button id="newToDoBtn"  type="submit" >Add a new toDo</button>
+    </form>
+  <div>
+    <p>List here:</p>
+  </div>
+    <div id="displayResult"></div>
+<!--
+  <div id="notStarted"></div>
+    <p>Not started</p>
+    <div id="inProgress">
+      <p>In Progress</p>
+    </div>
+    <div id="complete">
+      <p>Complete</p>
+    </div>-->
+  <script src="javascript.js"></script>
   </body>
 </html>
