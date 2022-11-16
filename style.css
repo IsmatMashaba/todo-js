@@ -1,7 +1,28 @@
 
-#displayResult {
+#todoList {
+    width: 482px;
+    margin-left: 60px;
 
-    border: 1px solid red;
-    display: flex;
-    justify-content: normal;
+}
+.box {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    clear: both;
+}
+
+.red {
+    background-color: #c92626;
+    margin-right: 10px;
+}
+
+.green {
+    background-color: green;
+}
+
+.orange {
+    background-color: blue;
+    margin-right: 10px;
 }

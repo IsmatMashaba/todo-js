@@ -10,31 +10,32 @@
   <body>
     <h2>To do list</h2>
     <form>
-  <label for="taskName">Task name: </label>
-  <input type="text" id="taskName" name="taskName" required>
+  <label for="title">Task name: </label>
+  <input type="text" id="title" name="title" required>
+
     <label for="date">Date: </label>
     <input type="date" id="date" name="date" required>
+
     <label for="status">Status: </label>
     <select name="status" id="status" required>
       <option value="done">Done</option>
-      <option value="Not Started"> Not Started</option>
-      <option value="In progress"> In progress</option>
+      <option value="not-started"> Not Started</option>
+      <option value="in-progress"> In progress</option>
     </select>
-    <button id="newToDoBtn"  type="submit" >Add a new toDo</button>
+    <input type="submit" id="submit-btn" value="Add a new toDo">
     </form>
+
   <div>
     <p>List here:</p>
   </div>
-    <div id="displayResult"></div>
-<!--
-  <div id="notStarted"></div>
-    <p>Not started</p>
-    <div id="inProgress">
-      <p>In Progress</p>
-    </div>
-    <div id="complete">
-      <p>Complete</p>
-    </div>-->
+    <div id="todoList"></div>
+
+    <div><div class='box red'></div>  Not Started </div>
+    <br>
+    <div><div class='box green'></div>  Done</div>
+    <br>
+    <div><div class='box orange'></div>  In progress</div>
+
   <script src="javascript.js"></script>
   </body>
 </html>

@@ -1,51 +1,121 @@
-/*let newToDoBtn=document.getElementById("newToDoBtn");
-newToDoBtn.addEventListene*/
-/*
+/*to make the logic smaller we will write the append items in a function and call the function inside the addEventListener*/
 
-let taskName=document.getElementById("taskName");
-let taskPara=document.createElement("p");
-taskPara.innerText=taskName;
-let displayResult=document.getElementById('displayResult');
-displayResult.append(taskPara);
+/*get all the title input and put them in an array to check if the title input is unique*/
+let titleArray=[];
 
-*/
-
-const newToDoBtn= document.getElementById('newToDoBtn');
-newToDoBtn.addEventListener('click',(event)=>{
-    let taskName=document.getElementById("taskName").value;
-    /*console.log(taskName)*/
-    let taskPara=document.createElement("p");
-    taskPara.innerText=taskName;
+/*delete the task by clicking the delete button*/
+function deleteTodoItem(todoTitle) {
+let todoItem=document.getElementById(todoTitle);
+todoItem.remove();
+}
 
 
-    let date=document.getElementById("date").value;
-    /*console.log(date)*/
-    let datePara=document.createElement("p");
-    datePara.innerText=date;
+/*Function to append todoList*/
 
-    let status=document.getElementById("status").value;
-    /*console.log(date)*/
-    let statusPara=document.createElement("p");
-    statusPara.innerText=status;
+function appendTodoItem(status,title,date) {
+    /*display the to do items*/
+    let todoList=document.getElementById('todoList');
 
-    let deleteBtn=document.createElement('button');
-    deleteBtn.innerHTML='Delete';
+    /*create element*/
+    let todoWrapper=document.createElement('div');
+    /*add the id for todo item*/
+    todoWrapper.id=title.value;
 
-
-    /*here status is not working same way like taskName and date*/
-
-    if (taskName && date && status ) {
-        let displayResult=document.getElementById('displayResult');
-        displayResult.append(taskPara)
-        displayResult.append(datePara);
-        displayResult.append(statusPara);
-        displayResult.append(deleteBtn);
+    /*create to do item and pass the values of user input*/
+    /*append items into the element and append the element into the todoList div*/
+    let todoItem=`<div style="display: flex">
+                    <div class=${status.value}></div>
+                    <p>Name:${title.value} Date:${date.value}</p>
+                    <button style="margin-left: 16px; height: 28px; width: 53px; margin-top: 10px" class="deleteBtn" onclick="deleteTodoItem('${title.value}')">Delete</button>
+                   </div>`;
+    todoWrapper.innerHTML=todoItem;
+    todoList.appendChild(todoWrapper);
 
 
-        deleteBtn.addEventListener('click',()=>{
-            displayResult.remove()
-        })
-        event.preventDefault();
+
+
+    titleArray.push(title.value)
+
+    /*styling the todoWrapper and items*/
+
+    todoWrapper.style.border='1px solid black';
+    let statusValue=status.value;
+    if (statusValue==='done') {
+        todoWrapper.style.backgroundColor='green'
     }
+    if (statusValue==='not-started') {
+        todoWrapper.style.backgroundColor='#c92626'
+    }
+    if (statusValue==='in-progress') {
+        todoWrapper.style.backgroundColor='orange'
+    }
+
+
+
+
+
+
+
+}
+
+/*create a function to reset the form after the user inserts input*/
+
+function resetForm(status,title,date) {
+    status.value='';
+    title.value='';
+    date.value='';
+}
+
+/*create a function to validate alert*/
+
+function validateForm(title,date) {
+    if (!title.value) {
+        alert("Please enter a title")
+        return false;
+    }if (!date.value) {
+        alert("Please enter a date")
+        return false;
+    }
+    /*check the title is unique*/
+
+    /*here if I use titleArray.includes the logic does not work like using titleArray.some, why?*/
+    if (titleArray.some((item)=>item===title.value)) {
+        alert('Title should be unique')
+        return false;
+    }
+    /*else*/
+    return true;
+}
+
+
+
+
+/*get the values of the title input and date through submit button*/
+
+const submitBtn= document.getElementById('submit-btn');
+submitBtn.addEventListener('click',(event)=>{
+
+    /*to prevent the form to refresh*/
+    event.preventDefault();
+
+
+
+    /*get the user input*/
+    let status=document.getElementById("status");
+    let title=document.getElementById("title");
+    let date=document.getElementById("date");
+
+    /*call the validation function*/
+    let isValid=validateForm(title,date);
+    if (!isValid) return;
+
+    /*call the Function to append todoList*/
+
+     appendTodoItem(status,title,date);
+
+    /*call the resetForm function to reset the form after the user puts the input*/
+
+     resetForm(status,title,date);
+
 
 });
